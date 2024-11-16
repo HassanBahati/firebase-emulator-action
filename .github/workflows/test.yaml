@@ -3,10 +3,10 @@ name: Test Firebase Emulator Action
 on:
   push:
     branches:
-      - main
+      - test
   pull_request:
     branches:
-      - main
+      - test
 
 jobs:
   test:
@@ -28,7 +28,7 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      # Run your Firebase Emulator Action
+      # Run your Firebase Emulator Action.
       - name: Run Firebase Emulator Action
         uses: ./ # Uses the current repository as an action
         with:
