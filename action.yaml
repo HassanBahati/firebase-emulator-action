@@ -58,7 +58,6 @@ runs:
         # Remove trailing comma if it exists
         EMULATORS=$(echo "$EMULATORS" | sed 's/,$//')
         
-        # Output the result for debugging purposes
         echo "Stripped emulators list: $EMULATORS"
         echo "EMULATORS=$EMULATORS" >> $GITHUB_ENV  # Store stripped emulators in the environment
 
