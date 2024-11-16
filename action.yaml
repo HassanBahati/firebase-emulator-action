@@ -40,6 +40,25 @@ runs:
       run: |
        sudo npm i -g firebase-tools@${{ inputs.firebase-tools-version }}
 
+    - name: Check and strip spaces from emulators input (if necessary)
+      shell: bash
+      run: |
+        EMULATORS="${{ inputs.emulators }}"
+        
+        # Check if there are spaces around the commas
+        if [[ "$EMULATORS" =~ [[:space:]] ]]; then
+          echo "Spaces detected in emulators list, stripping spaces..."
+          # Remove spaces around commas
+          EMULATORS=$(echo "$EMULATORS" | tr -s ' ' ',')
+          EMULATORS=$(echo "$EMULATORS" | tr -s ',' ',')  # Ensure no accidental extra commas
+        else
+          echo "No spaces detected in emulators list."
+        fi
+        
+        # Output the result for debugging purposes
+        echo "Stripped emulators list: $EMULATORS"
+        echo "EMULATORS=$EMULATORS" >> $GITHUB_ENV
+
     - name: Start Firebase Emulator
       shell: bash
       run: |
