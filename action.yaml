@@ -54,6 +54,9 @@ runs:
         else
           echo "No spaces detected in emulators list."
         fi
+
+        # Remove trailing comma if it exists
+        EMULATORS=$(echo "$EMULATORS" | sed 's/,$//')
         
         # Output the result for debugging purposes
         echo "Stripped emulators list: $EMULATORS"
