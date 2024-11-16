@@ -31,7 +31,7 @@ inputs:
     description: 'The port to check for when starting the Firebase Emulator Suite'
     required: false
     default: '8080' # Firestore emulator default port
-
+    
 runs:
   using: "composite"
   steps:
@@ -57,9 +57,9 @@ runs:
         
         # Output the result for debugging purposes
         echo "Stripped emulators list: $EMULATORS"
-        echo "EMULATORS=$EMULATORS" >> $GITHUB_ENV
+        echo "EMULATORS=$EMULATORS" >> $GITHUB_ENV  # Store stripped emulators in the environment
 
     - name: Start Firebase Emulator
       shell: bash
       run: |
-       chmod +x ./start-firebase-emulator.sh && ./start-firebase-emulator.sh ${{ inputs.emulators }} ${{ inputs.project-id }} ${{ inputs.max-retries }} ${{ inputs.max-checks }} ${{ inputs.wait-time }} ${{ inputs.check-port }}
+       chmod +x ./start-firebase-emulator.sh && ./start-firebase-emulator.sh ${{ env.EMULATORS }} ${{ inputs.project-id }} ${{ inputs.max-retries }} ${{ inputs.max-checks }} ${{ inputs.wait-time }} ${{ inputs.check-port }}
